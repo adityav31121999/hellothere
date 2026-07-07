@@ -1,2 +1,3 @@
-# hellothere
-lets talk shit
+# Personal Site
+
+Random Shit and Ideas

@@ -1,0 +1,6 @@
+{
+  "name": "Personal GitHub Pages Site",
+  "description": "An elegant, interactive personal website and developer portfolio for GitHub Pages, featuring in-place customization, theme switching, and code export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
