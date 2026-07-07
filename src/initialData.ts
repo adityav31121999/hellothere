@@ -65,7 +65,7 @@ export const initialSiteData: SiteBuilderData = {
 </p>
 <p>
   All Coded by GitHub Copilot, and the site is hosted on GitHub Pages.
-  The source code is available in the <a href="https://github.com/adityav31121999/adiv31121999" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
+  The source code is available in the <a href="https://github.com/adityav31121999/hellothere" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
 </p>`
     }
   ],
