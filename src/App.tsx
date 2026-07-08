@@ -314,29 +314,6 @@ export default function App() {
                       </ul>
                     </section>
 
-                    {/* Scientific Focus tags */}
-                    <section 
-                      className="border rounded-2xl p-5 shadow-sm space-y-4" 
-                      style={{ backgroundColor: currentSurface, borderColor: currentBorder }}
-                    >
-                      <div className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-amber-400" />
-                        <h3 className="text-xs uppercase font-mono font-bold tracking-wider" style={{ color: style.accentColor }}>
-                          Areas of Interest
-                        </h3>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {profile.interests.map((interest, idx) => (
-                          <span 
-                            key={idx} 
-                            className="text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg border"
-                            style={{ backgroundColor: currentBg, borderColor: currentBorder, color: currentTextColor }}
-                          >
-                            {interest}
-                          </span>
-                        ))}
-                      </div>
-                    </section>
                   </div>
                 </div>
               ) : activePage === 'about' ? (
@@ -358,6 +335,26 @@ export default function App() {
                     <p className="text-sm leading-relaxed" style={{ color: currentMutedColor }}>
                       {profile.bio}
                     </p>
+                  </section>
+
+                  <section className="border rounded-2xl p-6 shadow-sm space-y-4" style={{ backgroundColor: currentSurface, borderColor: currentBorder }}>
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      <h2 className="text-sm uppercase font-mono font-bold tracking-wider" style={{ color: style.accentColor }}>
+                        Areas of Interest
+                      </h2>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {profile.interests.map((interest, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[10px] font-mono font-semibold px-2.5 py-1 rounded-lg border"
+                          style={{ backgroundColor: currentBg, borderColor: currentBorder, color: currentTextColor }}
+                        >
+                          {interest}
+                        </span>
+                      ))}
+                    </div>
                   </section>
 
                   <section className="border rounded-2xl p-6 shadow-sm space-y-5" style={{ backgroundColor: currentSurface, borderColor: currentBorder }}>
