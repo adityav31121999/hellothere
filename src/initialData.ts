@@ -3,7 +3,7 @@ import { SiteBuilderData } from './types';
 export const initialSiteData: SiteBuilderData = {
   profile: {
     name: "Aditya Vishwakarma",
-    username: "adiv31121999",
+    username: "adityav31121999",
     tagline: "Science enthusiast • programmer • builder",
     bio: "I have been working on my ideas for long time and want them to manifest and evolve into reality (inventions and innovations). I enjoy working on computation, maths, physics, and number theory experiments.",
     emails: ["adityav31121999@zohomail.in", "adityavishwakarma@dvyamsha.in"],
@@ -65,7 +65,6 @@ export const initialSiteData: SiteBuilderData = {
 </p>
 <p>
   All Coded by GitHub Copilot, and the site is hosted on GitHub Pages.
-  The source code is available in the <a href="https://github.com/adityav31121999/hellothere" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
 </p>`
     }
   ],
