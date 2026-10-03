@@ -18,7 +18,6 @@ import {
   ExternalLink,
   BookOpen,
   User,
-  Compass
 } from 'lucide-react';
 
 const LOCAL_STORAGE_KEY = 'aditya_site_builder_data_v3';
@@ -29,7 +28,7 @@ export default function App() {
   const [activeBlogPostId, setActiveBlogPostId] = useState<string | null>(null);
   const [localTheme, setLocalTheme] = useState<'dark' | 'light'>(() => {
     const savedTheme = localStorage.getItem('aditya_site_theme');
-    return (savedTheme as 'dark' | 'light') || 'dark';
+    return (savedTheme as 'dark' | 'light') || 'light';
   });
   const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
 
@@ -55,10 +54,10 @@ export default function App() {
 
   const currentBg = localTheme === 'dark' ? style.bgDark : style.bgLight;
   const currentTextColor = localTheme === 'dark' ? '#f4f4f5' : '#18181b';
-  const currentMutedColor = localTheme === 'dark' ? '#9ca3af' : '#4b5563';
-  const currentSurface = localTheme === 'dark' ? '#11131c' : '#ffffff';
-  const currentBorder = localTheme === 'dark' ? '#1e293b' : '#e2e8f0';
-  const currentGridColor = localTheme === 'dark' ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.02)';
+  const currentMutedColor = localTheme === 'dark' ? '#a1a1aa' : '#64748b';
+  const currentSurface = localTheme === 'dark' ? '#111214' : '#ffffff';
+  const currentBorder = localTheme === 'dark' ? '#27272a' : '#e2e8f0';
+  const currentGridColor = localTheme === 'dark' ? 'rgba(255, 255, 255, 0.025)' : 'rgba(15, 23, 42, 0.075)';
 
   const completedProjects = projects.filter(p => p.status === 'completed');
 
@@ -94,24 +93,19 @@ export default function App() {
       <div className="absolute top-6 right-6 z-10">
         <button
           onClick={() => setLocalTheme(localTheme === 'dark' ? 'light' : 'dark')}
-          className="p-2.5 rounded-xl border shadow-md transition-all duration-200 hover:scale-105 cursor-pointer flex items-center justify-center gap-2"
+          className="p-2.5 rounded-full border transition-colors duration-200 cursor-pointer flex items-center justify-center"
           style={{
             backgroundColor: currentSurface,
             borderColor: currentBorder,
             color: currentTextColor,
           }}
           title={localTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          aria-label={localTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
         >
           {localTheme === 'dark' ? (
-            <>
-              <Sun className="w-4 h-4 text-amber-400" />
-              <span className="text-xs font-semibold pr-1">Light</span>
-            </>
+            <Sun className="w-4 h-4 text-amber-500" />
           ) : (
-            <>
-              <Moon className="w-4 h-4 text-indigo-500" />
-              <span className="text-xs font-semibold pr-1">Dark</span>
-            </>
+            <Moon className="w-4 h-4" />
           )}
         </button>
       </div>
@@ -120,35 +114,41 @@ export default function App() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12 md:py-24 min-h-screen flex flex-col md:flex-row gap-12 lg:gap-20">
         
         {/* Left Column: Fixed/Sticky Side Panel */}
-        <aside className="w-full md:w-64 shrink-0 flex flex-col justify-between gap-8 md:sticky md:top-24 md:h-[calc(100vh-12rem)]">
-          <div className="space-y-8">
+        <aside className="w-full md:w-60 shrink-0 flex flex-col justify-between gap-8 md:sticky md:top-16 md:h-[calc(100vh-8rem)]">
+          <div className="space-y-7">
             {/* Branding Logo & Title */}
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xl font-extrabold tracking-widest uppercase font-display" style={{ color: currentTextColor }}>
                   {profile.name.split(' ')[0]}
                 </span>
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(34,197,94,0.8)] animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
               </div>
               <p className="text-xs font-medium mt-1.5" style={{ color: currentMutedColor }}>
                 {profile.tagline}
               </p>
             </div>
 
-            {/* Custom Status Segment */}
-            <div 
-              className="p-3.5 rounded-xl border text-[11px] leading-relaxed font-mono"
-              style={{ backgroundColor: currentSurface, borderColor: currentBorder }}
-            >
-              <div className="flex items-center gap-1.5 mb-1.5 text-xs font-semibold font-sans" style={{ color: style.accentColor }}>
-                <Compass className="w-3.5 h-3.5" />
-                <span>Currently</span>
-              </div>
-              <span style={{ color: currentTextColor }}>{profile.status}</span>
+            <div className="space-y-5 font-mono">
+              <section>
+                <h2 className="text-[10px] uppercase tracking-wider font-bold mb-2" style={{ color: currentMutedColor }}>Currently</h2>
+                <p className="text-[11px] leading-relaxed" style={{ color: currentTextColor }}>{profile.status}</p>
+              </section>
+              <section>
+                <h2 className="text-[10px] uppercase tracking-wider font-bold mb-2" style={{ color: currentMutedColor }}>Focus</h2>
+                <ol className="space-y-1.5">
+                  {profile.interests.slice(0, 3).map((interest, index) => (
+                    <li key={interest} className="flex items-baseline gap-2 text-[11px]">
+                      <span style={{ color: style.accentColor }}>{String(index + 1).padStart(2, '0')}</span>
+                      <span style={{ color: currentTextColor }}>{interest}</span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
             </div>
 
             {/* Navigation Tabs */}
-            <nav className="flex flex-row md:flex-col gap-1.5 p-1 md:p-0 rounded-xl bg-slate-950/5 md:bg-transparent overflow-x-auto md:overflow-visible shrink-0 select-none">
+            <nav aria-label="Main navigation" className="flex flex-row md:flex-col gap-1 overflow-x-auto md:overflow-visible shrink-0 select-none border-y py-2 md:border-y-0 md:py-0">
               {[
                 { id: 'home', label: 'Home', icon: <User className="w-3.5 h-3.5" /> },
                 { id: 'about', label: 'About', icon: <Sparkles className="w-3.5 h-3.5" /> },
@@ -160,11 +160,11 @@ export default function App() {
                   <button
                     key={p.id}
                     onClick={() => handleNavClick(p.id as any)}
-                    className="flex-1 md:flex-initial flex items-center justify-center md:justify-start gap-2 px-3.5 py-2 text-xs font-bold rounded-lg border transition-all duration-150 cursor-pointer text-center md:text-left shrink-0"
+                    className="flex-1 md:flex-initial flex items-center justify-center md:justify-start gap-2 px-2.5 py-2 text-xs font-semibold border-l-2 transition-colors duration-150 cursor-pointer text-center md:text-left shrink-0"
                     style={{
-                      background: isActive ? `linear-gradient(135deg, ${style.accentColor}, ${style.accentStrong})` : 'transparent',
-                      borderColor: isActive ? 'transparent' : currentBorder,
-                      color: isActive ? '#ffffff' : currentMutedColor,
+                      backgroundColor: isActive ? `${style.accentColor}12` : 'transparent',
+                      borderColor: isActive ? style.accentColor : 'transparent',
+                      color: isActive ? currentTextColor : currentMutedColor,
                     }}
                   >
                     {p.icon}
@@ -176,18 +176,18 @@ export default function App() {
           </div>
 
           {/* Sidebar Footer Metadata */}
-          <div className="text-[11px] font-mono space-y-2 mt-4 md:mt-0 pt-6 border-t md:border-t-0 border-dashed" style={{ borderColor: currentBorder, color: currentMutedColor }}>
+          <div className="text-[11px] font-mono space-y-2 mt-4 md:mt-0 pt-5 border-t" style={{ borderColor: currentBorder, color: currentMutedColor }}>
             <div className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-emerald-500/80" /> 
+              <MapPin className="w-3.5 h-3.5" /> 
               <span>{profile.location}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Github className="w-3.5 h-3.5 text-sky-500/80" />
+              <Github className="w-3.5 h-3.5" />
               <a 
                 href={`https://github.com/${profile.username}`} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:underline hover:text-sky-400"
+                className="hover:underline"
               >
                 github.com/{profile.username}
               </a>
@@ -246,24 +246,23 @@ export default function App() {
                 /* HOME VIEW */
                 <div className="space-y-10">
                   {/* Hero Intro Pitch */}
-                  <section className="space-y-4 py-2">
-                    <span className="text-xs uppercase tracking-widest font-mono font-bold" style={{ color: style.accentColor }}>
-                      Welcome to my space
+                  <section className="space-y-5 pt-5 md:pt-10 pb-2">
+                    <span className="text-[10px] uppercase tracking-wider font-mono font-bold" style={{ color: style.accentStrong }}>
+                      Personal research notebook
                     </span>
-                    <h1 className="text-3xl sm:text-4.5xl font-black tracking-tight leading-none" style={{ color: currentTextColor }}>
-                      Curious experiments, thoughtful notes, and public code.
+                    <h1 className="font-display text-4xl sm:text-5xl leading-[1.08] max-w-2xl" style={{ color: currentTextColor }}>
+                      Curious experiments,<br className="hidden sm:block" /> thoughtful notes, and public code.
                     </h1>
-                    <p className="text-base sm:text-lg leading-relaxed max-w-2xl font-light" style={{ color: currentMutedColor }}>
-                      I’m <strong className="font-semibold" style={{ color: currentTextColor }}>{profile.name}</strong>. {profile.bio}
+                    <p className="text-sm sm:text-base leading-relaxed max-w-2xl" style={{ color: currentMutedColor }}>
+                      I’m <strong className="font-semibold" style={{ color: currentTextColor }}>{profile.name}</strong>. I explore computation across mathematics, physics, machine learning, and systems.
                     </p>
                     
-                    <div className="flex flex-wrap gap-3 pt-4 select-none">
+                    <div className="flex flex-wrap gap-5 pt-2 select-none">
                       <button
                         onClick={() => handleNavClick('blog')}
-                        className="text-xs font-bold py-2.5 px-5 rounded-xl cursor-pointer shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2"
+                        className="text-xs font-bold py-2 cursor-pointer transition-colors flex items-center gap-2 hover:underline underline-offset-4"
                         style={{
-                          background: `linear-gradient(135deg, ${style.accentColor}, ${style.accentStrong})`,
-                          color: 'white',
+                          color: currentTextColor,
                         }}
                       >
                         <span>Read the blog</span>
@@ -271,50 +270,66 @@ export default function App() {
                       </button>
                       <button
                         onClick={() => handleNavClick('code')}
-                        className="text-xs font-bold py-2.5 px-5 rounded-xl border cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2"
+                        className="text-xs font-bold py-2 cursor-pointer transition-colors flex items-center gap-2 hover:underline underline-offset-4"
                         style={{
-                          backgroundColor: currentSurface,
-                          borderColor: currentBorder,
-                          color: currentTextColor,
+                          color: currentMutedColor,
                         }}
                       >
                         <span>Browse my code</span>
-                        <Code className="w-3.5 h-3.5 text-sky-500/80" />
+                        <Code className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </section>
 
-                  {/* Highlights Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Recent posts */}
-                    <section 
-                      className="border rounded-2xl p-5 shadow-sm space-y-4" 
-                      style={{ backgroundColor: currentSurface, borderColor: currentBorder }}
-                    >
-                      <div className="flex items-center gap-2">
-                        <BookOpen className="w-4 h-4 text-emerald-400" />
-                        <h3 className="text-xs uppercase font-mono font-bold tracking-wider" style={{ color: style.accentColor }}>
-                          Recent Blog Posts
-                        </h3>
-                      </div>
-                      <ul className="space-y-3">
-                        {blogs.slice(0, 3).map((b) => (
-                          <li key={b.id} className="group">
-                            <button
-                              onClick={() => handleBlogClick(b.id)}
-                              className="text-left cursor-pointer text-xs md:text-sm font-semibold group-hover:underline group-hover:opacity-90 transition-all flex items-center gap-1.5"
-                              style={{ color: style.accentColor }}
-                            >
-                              <span>{b.title}</span>
-                              <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                            </button>
-                            <p className="text-[11px] mt-0.5" style={{ color: currentMutedColor }}>{b.date}</p>
-                          </li>
-                        ))}
-                      </ul>
-                    </section>
+                  <section aria-labelledby="recent-work-heading">
+                    <div className="flex items-center justify-between border-b pb-3 mb-1" style={{ borderColor: currentBorder }}>
+                      <h2 id="recent-work-heading" className="text-[10px] uppercase tracking-wider font-mono font-bold" style={{ color: currentMutedColor }}>Recent work</h2>
+                      <button onClick={() => handleNavClick('code')} className="text-[10px] font-mono hover:underline flex items-center gap-1 cursor-pointer" style={{ color: currentMutedColor }}>
+                        {String(completedProjects.length).padStart(2, '0')} projects <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                    {completedProjects.length ? completedProjects.slice(0, 3).map((project, index) => (
+                      <article key={project.id} className="grid grid-cols-[2rem_minmax(0,1fr)] sm:grid-cols-[2.5rem_minmax(0,1fr)_auto] gap-x-3 py-5 border-b" style={{ borderColor: currentBorder }}>
+                        <span className="font-mono text-[11px] pt-1" style={{ color: style.accentStrong }}>{String(index + 1).padStart(2, '0')}</span>
+                        <div className="min-w-0">
+                          <h3 className="font-mono font-bold uppercase text-sm" style={{ color: currentTextColor }}>{project.name}</h3>
+                          <p className="text-xs leading-relaxed mt-1.5 max-w-xl" style={{ color: currentMutedColor }}>{project.description}</p>
+                          {project.name.toLowerCase().includes('float12') && (
+                            <div className="grid grid-cols-[1fr_5fr_6fr] max-w-sm mt-4 border font-mono text-[9px] text-center" style={{ borderColor: currentBorder }} aria-label="12-bit format: 1 sign bit, 5 exponent bits, 6 mantissa bits">
+                              <div className="p-2 border-r" style={{ borderColor: currentBorder }}><span className="block" style={{ color: currentMutedColor }}>SIGN</span><strong style={{ color: style.accentStrong }}>1b</strong></div>
+                              <div className="p-2 border-r" style={{ borderColor: currentBorder }}><span className="block" style={{ color: currentMutedColor }}>EXPONENT</span><strong style={{ color: '#2563eb' }}>5b</strong></div>
+                              <div className="p-2"><span className="block" style={{ color: currentMutedColor }}>MANTISSA</span><strong style={{ color: '#7c3aed' }}>6b</strong></div>
+                            </div>
+                          )}
+                          <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 text-[9px] font-mono uppercase" style={{ color: currentMutedColor }}>
+                            <span>{project.status}</span><span>Open source</span>
+                            {project.hardcoded && <span style={{ color: '#059669' }}>Handwritten</span>}
+                          </div>
+                        </div>
+                        {project.githubUrl && (
+                          <a href={project.githubUrl} target="_blank" rel="noreferrer" aria-label={`Explore ${project.name} on GitHub`} className="hidden sm:inline-flex items-center gap-1 self-start text-[10px] font-mono hover:underline" style={{ color: currentMutedColor }}>
+                            Explore <ExternalLink className="w-3 h-3" />
+                          </a>
+                        )}
+                      </article>
+                    )) : <p className="py-5 text-xs" style={{ color: currentMutedColor }}>No projects published yet.</p>}
+                  </section>
 
-                  </div>
+                  <section aria-labelledby="recent-notes-heading">
+                    <div className="flex items-center justify-between border-b pb-3 mb-1" style={{ borderColor: currentBorder }}>
+                      <h2 id="recent-notes-heading" className="text-[10px] uppercase tracking-wider font-mono font-bold" style={{ color: currentMutedColor }}>Recent notes</h2>
+                      <button onClick={() => handleNavClick('blog')} className="text-[10px] font-mono hover:underline flex items-center gap-1 cursor-pointer" style={{ color: currentMutedColor }}>
+                        {String(blogs.length).padStart(2, '0')} notes <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                    {blogs.length ? blogs.slice(0, 4).map((blog) => (
+                      <button key={blog.id} onClick={() => handleBlogClick(blog.id)} className="group w-full text-left grid grid-cols-1 sm:grid-cols-[7.5rem_minmax(0,1fr)_auto] gap-1 sm:gap-4 items-center py-4 border-b cursor-pointer" style={{ borderColor: currentBorder }}>
+                        <span className="text-[9px] font-mono uppercase" style={{ color: style.accentStrong }}>{blog.date}</span>
+                        <span className="text-xs sm:text-sm font-medium group-hover:underline" style={{ color: currentTextColor }}>{blog.title}</span>
+                        <ArrowRight className="hidden sm:block w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" style={{ color: currentMutedColor }} />
+                      </button>
+                    )) : <p className="py-5 text-xs" style={{ color: currentMutedColor }}>No notes published yet.</p>}
+                  </section>
                 </div>
               ) : activePage === 'about' ? (
                 /* ABOUT ME VIEW */

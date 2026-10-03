@@ -4,12 +4,12 @@ export const initialSiteData: SiteBuilderData = {
   profile: {
     name: "Aditya Vishwakarma",
     username: "adityav31121999",
-    tagline: "Science enthusiast • programmer • builder",
+    tagline: "Researcher • programmer • builder",
     bio: "I have been working on my ideas for long time and want them to manifest and evolve into reality (inventions and innovations). I enjoy working on computation, maths, physics, and number theory experiments.",
     emails: ["adityav31121999@zohomail.in", "adityavishwakarma@dvyamsha.in"],
     location: "India",
     status: "Exploring number theory, machine learning, and low-precision computation",
-    interests: ["Mathematics", "Number Theory", "Physics", "Computation", "Machine Learning", "Low-precision Arithmetic"]
+    interests: ["Computation", "Mathematics", "Number Theory", "Physics", "Machine Learning", "Low-precision Arithmetic"]
   },
   projects: [
     {
@@ -69,9 +69,9 @@ export const initialSiteData: SiteBuilderData = {
     }
   ],
   style: {
-    accentColor: "#fbbf24",
+    accentColor: "#f59e0b",
     accentStrong: "#d97706",
-    bgDark: "#09090b",
+    bgDark: "#0b0b0c",
     bgLight: "#fafafa",
     gridSpacing: "24px"
   }
