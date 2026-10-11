@@ -9,7 +9,7 @@ export const initialSiteData: SiteBuilderData = {
     emails: ["adityav31121999@zohomail.in", "adityavishwakarma@dvyamsha.in"],
     location: "India",
     status: "Exploring number theory, machine learning, and low-precision computation",
-    interests: ["Computation", "Mathematics", "Number Theory", "Physics", "Machine Learning", "Low-precision Arithmetic"]
+    interests: ["Mathematics", "Physics", "Computer Science", "Machine Learning", "Languages"]
   },
   projects: [
     {
