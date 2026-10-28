@@ -145,14 +145,14 @@ export function LocalAIsePage({
         </div>
       </section>
 
-      <section className="border rounded-2xl p-6 md:p-8 shadow-sm space-y-6" style={{ backgroundColor: currentSurface, borderColor: currentBorder }}>
+      <section className="border rounded-2xl p-4 md:p-6 shadow-sm space-y-6" style={{ backgroundColor: currentSurface, borderColor: currentBorder }}>
         <div className="flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-amber-500" />
           <h2 className="text-xs uppercase tracking-widest font-mono font-bold" style={{ color: style.accentColor }}>
             Stack
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <StackCell label="UI" value="React 19, TypeScript, Zustand, Vite 5, lucide-react, pdf.js" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
           <StackCell label="Shell" value="Tauri 2 (Rust 2021)" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
           <StackCell label="Inference" value="llama-server from llama.cpp" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
@@ -162,7 +162,7 @@ export function LocalAIsePage({
         </div>
       </section>
 
-      <section className="border rounded-2xl p-6 md:p-8 shadow-sm space-y-6" style={{ backgroundColor: currentSurface, borderColor: currentBorder }}>
+      <section className="border rounded-2xl p-4 md:p-6 shadow-sm space-y-6" style={{ backgroundColor: currentSurface, borderColor: currentBorder }}>
         <div className="flex items-center gap-2">
           <FileCode className="w-5 h-5 text-amber-500" />
           <h2 className="text-xs uppercase tracking-widest font-mono font-bold" style={{ color: style.accentColor }}>
