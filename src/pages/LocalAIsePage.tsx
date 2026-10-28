@@ -152,7 +152,7 @@ export function LocalAIsePage({
             Stack
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <StackCell label="UI" value="React 19, TypeScript, Zustand, Vite 5, lucide-react, pdf.js" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
           <StackCell label="Shell" value="Tauri 2 (Rust 2021)" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
           <StackCell label="Inference" value="llama-server from llama.cpp" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
@@ -169,16 +169,40 @@ export function LocalAIsePage({
             Project folder format
           </h2>
         </div>
-        <div className="font-mono text-[10px] leading-relaxed overflow-x-auto" style={{ color: currentMutedColor }}>
-{`MyProject/
-├── project.json   # manifest
-├── data/          # your source files
-├── chats/         # chat-001.json, chat-002.json
-├── diary/         # one Markdown page per date (optional)
-├── outputs/       # files the assistant produces
-└── .LocalAIse/    # app state – safe to delete to re-index
-    ├── index.json
-    └── activity.log`}
+        <div className="font-mono text-[10px] leading-relaxed overflow-x-auto space-y-1">
+          <div className="flex gap-2" style={{ color: currentTextColor }}>
+            <span style={{ color: currentMutedColor }}>MyProject/</span>
+          </div>
+          <div className="flex gap-2 pl-4">
+            <span style={{ color: currentMutedColor }}>├── project.json</span>
+            <span style={{ color: '#94a3b8' }}># manifest</span>
+          </div>
+          <div className="flex gap-2 pl-4">
+            <span style={{ color: currentMutedColor }}>├── data/</span>
+            <span style={{ color: '#94a3b8' }}># your source files</span>
+          </div>
+          <div className="flex gap-2 pl-4">
+            <span style={{ color: currentMutedColor }}>├── chats/</span>
+            <span style={{ color: '#94a3b8' }}># chat-001.json, chat-002.json</span>
+          </div>
+          <div className="flex gap-2 pl-4">
+            <span style={{ color: currentMutedColor }}>├── diary/</span>
+            <span style={{ color: '#94a3b8' }}># one Markdown page per date (optional)</span>
+          </div>
+          <div className="flex gap-2 pl-4">
+            <span style={{ color: currentMutedColor }}>├── outputs/</span>
+            <span style={{ color: '#94a3b8' }}># files the assistant produces</span>
+          </div>
+          <div className="flex gap-2 pl-4">
+            <span style={{ color: currentMutedColor }}>└── .LocalAIse/</span>
+            <span style={{ color: '#94a3b8' }}># app state – safe to delete to re-index</span>
+          </div>
+          <div className="flex gap-2 pl-8">
+            <span style={{ color: currentMutedColor }}>    ├── index.json</span>
+          </div>
+          <div className="flex gap-2 pl-8">
+            <span style={{ color: currentMutedColor }}>    └── activity.log</span>
+          </div>
         </div>
       </section>
     </div>
@@ -240,12 +264,14 @@ function StackCell({
 }) {
   return (
     <div className="border-b pb-4 last:border-0" style={{ borderColor: currentBorder }}>
-      <span className="text-[10px] uppercase font-mono font-bold tracking-wider" style={{ color: currentMutedColor }}>
-        {label}
-      </span>
-      <span className="text-sm font-mono leading-relaxed" style={{ color: currentTextColor }}>
-        {value}
-      </span>
+      <div className="flex items-baseline gap-3">
+        <span className="text-[10px] uppercase font-mono font-bold tracking-wider shrink-0" style={{ color: currentMutedColor }}>
+          {label}
+        </span>
+        <span className="text-sm font-mono leading-relaxed" style={{ color: currentTextColor }}>
+          {value}
+        </span>
+      </div>
     </div>
   );
 }
