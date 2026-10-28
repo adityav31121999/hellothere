@@ -148,32 +148,35 @@ export function LocalAIsePage({
       <section className="border rounded-2xl p-6 md:p-8 shadow-sm space-y-6" style={{ backgroundColor: currentSurface, borderColor: currentBorder }}>
         <div className="flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-amber-500" />
-          <h2 className="text-sm uppercase font-mono font-bold tracking-wider" style={{ color: style.accentColor }}>
+          <h2 className="text-xs uppercase tracking-widest font-mono font-bold" style={{ color: style.accentColor }}>
             Stack
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-          <StackRow label="UI" value="React 19, TypeScript, Zustand, Vite 5, lucide-react, pdf.js" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
-          <StackRow label="Shell" value="Tauri 2 (Rust 2021)" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
-          <StackRow label="Inference" value="llama-server from llama.cpp" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
-          <StackRow label="Retrieval" value="Rust ingest + chunking + scoring, optional fastembed" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
-          <StackRow label="Research storage" value="SQLite (rusqlite) + sqlite-vec" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
-          <StackRow label="Packaging" value="NSIS (Windows), AppImage / DEB (Linux)" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StackCell label="UI" value="React 19, TypeScript, Zustand, Vite 5, lucide-react, pdf.js" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
+          <StackCell label="Shell" value="Tauri 2 (Rust 2021)" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
+          <StackCell label="Inference" value="llama-server from llama.cpp" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
+          <StackCell label="Retrieval" value="Rust ingest + chunking + scoring, optional fastembed" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
+          <StackCell label="Research storage" value="SQLite (rusqlite) + sqlite-vec" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
+          <StackCell label="Packaging" value="NSIS (Windows), AppImage / DEB (Linux)" currentBorder={currentBorder} currentMutedColor={currentMutedColor} currentTextColor={currentTextColor} />
         </div>
       </section>
 
-      <section className="border rounded-2xl p-6 md:p-8 shadow-sm" style={{ backgroundColor: currentBg, borderColor: currentBorder }}>
-        <h2 className="text-xs uppercase tracking-widest font-mono font-bold mb-4" style={{ color: style.accentColor }}>
-          Project folder format
-        </h2>
+      <section className="border rounded-2xl p-6 md:p-8 shadow-sm space-y-6" style={{ backgroundColor: currentSurface, borderColor: currentBorder }}>
+        <div className="flex items-center gap-2">
+          <FileCode className="w-5 h-5 text-amber-500" />
+          <h2 className="text-xs uppercase tracking-widest font-mono font-bold" style={{ color: style.accentColor }}>
+            Project folder format
+          </h2>
+        </div>
         <div className="font-mono text-[10px] leading-relaxed overflow-x-auto" style={{ color: currentMutedColor }}>
 {`MyProject/
-├── project.json        # manifest
-├── data/               # your source files
-├── chats/              # chat-001.json, chat-002.json
-├── diary/              # one Markdown page per date (optional)
-├── outputs/            # files the assistant produces
-└── .LocalAIse/         # app state — safe to delete to re-index
+├── project.json   # manifest
+├── data/          # your source files
+├── chats/         # chat-001.json, chat-002.json
+├── diary/         # one Markdown page per date (optional)
+├── outputs/       # files the assistant produces
+└── .LocalAIse/    # app state – safe to delete to re-index
     ├── index.json
     └── activity.log`}
         </div>
@@ -222,7 +225,7 @@ function PrivacyPoint({ icon, children }: { icon: ReactNode; children: string })
   );
 }
 
-function StackRow({
+function StackCell({
   label,
   value,
   currentBorder,
@@ -236,9 +239,13 @@ function StackRow({
   currentTextColor: string;
 }) {
   return (
-    <div className="flex justify-between pb-1 border-b" style={{ borderColor: currentBorder }}>
-      <span style={{ color: currentMutedColor }}>{label}</span>
-      <span style={{ color: currentTextColor }}>{value}</span>
+    <div className="border-b pb-4 last:border-0" style={{ borderColor: currentBorder }}>
+      <span className="text-[10px] uppercase font-mono font-bold tracking-wider" style={{ color: currentMutedColor }}>
+        {label}
+      </span>
+      <span className="text-sm font-mono leading-relaxed" style={{ color: currentTextColor }}>
+        {value}
+      </span>
     </div>
   );
 }
