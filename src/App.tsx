@@ -2,18 +2,19 @@ import { useState, useEffect } from 'react';
 import { initialSiteData } from './initialData';
 import { SiteBuilderData } from './types';
 import { motion, AnimatePresence } from 'motion/react';
-import { Github, MapPin, Sun, Moon, BookOpen, Code, User, Sparkles } from 'lucide-react';
+import { Github, MapPin, Sun, Moon, BookOpen, Code, User, Sparkles, Brain } from 'lucide-react';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { BlogPage } from './pages/BlogPage';
 import { CodePage } from './pages/CodePage';
+import { LocalAIsePage } from './pages/LocalAIsePage';
 import { blogPageRegistry } from './pages/blogs';
 
 const LOCAL_STORAGE_KEY = 'aditya_site_builder_data_v3';
 
 export default function App() {
   const [data, setData] = useState<SiteBuilderData>(initialSiteData);
-  const [activePage, setActivePage] = useState<'about' | 'home' | 'blog' | 'code'>('home');
+  const [activePage, setActivePage] = useState<'about' | 'home' | 'blog' | 'code' | 'localAIse'>('home');
   const [activeBlogPostId, setActiveBlogPostId] = useState<string | null>(null);
   const [localTheme, setLocalTheme] = useState<'dark' | 'light'>(() => {
     const savedTheme = localStorage.getItem('aditya_site_theme');
@@ -46,7 +47,7 @@ export default function App() {
   const currentBorder = localTheme === 'dark' ? '#27272a' : '#e2e8f0';
   const currentGridColor = localTheme === 'dark' ? 'rgba(255, 255, 255, 0.025)' : 'rgba(15, 23, 42, 0.075)';
 
-  const handleNavClick = (page: 'about' | 'home' | 'blog' | 'code') => {
+  const handleNavClick = (page: 'about' | 'home' | 'blog' | 'code' | 'localAIse') => {
     setActivePage(page);
     setActiveBlogPostId(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -133,6 +134,17 @@ export default function App() {
             style={style}
           />
         );
+      case 'localAIse':
+        return (
+          <LocalAIsePage
+            style={style}
+            currentTextColor={currentTextColor}
+            currentMutedColor={currentMutedColor}
+            currentBorder={currentBorder}
+            currentBg={currentBg}
+            currentSurface={currentSurface}
+          />
+        );
       default:
         return (
           <HomePage
@@ -217,12 +229,13 @@ export default function App() {
                 { id: 'about', label: 'About', icon: <Sparkles className="w-3.5 h-3.5" /> },
                 { id: 'blog', label: 'Blog', icon: <BookOpen className="w-3.5 h-3.5" /> },
                 { id: 'code', label: 'Code', icon: <Code className="w-3.5 h-3.5" /> },
+              { id: 'localAIse', label: 'LocalAIse', icon: <Brain className="w-3.5 h-3.5" /> },
               ].map((item) => {
                 const isActive = activePage === item.id && !activeBlogPostId;
                 return (
                   <button
                     key={item.id}
-                    onClick={() => handleNavClick(item.id as 'about' | 'home' | 'blog' | 'code')}
+                    onClick={() => handleNavClick(item.id as 'about' | 'home' | 'blog' | 'code' | 'localAIse')}
                     className="flex-1 md:flex-initial flex items-center justify-center md:justify-start gap-2 px-2.5 py-2 text-xs font-semibold border-l-2 transition-colors duration-150 cursor-pointer text-center md:text-left shrink-0"
                     style={{
                       backgroundColor: isActive ? `${style.accentColor}12` : 'transparent',
